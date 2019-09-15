@@ -132,6 +132,14 @@ void TelnetService::maximum_connections(size_t count) {
 	}
 }
 
+unsigned long TelnetService::initial_idle_timeout() const {
+	return initial_idle_timeout_;
+}
+
+void TelnetService::initial_idle_timeout(unsigned long timeout) {
+	initial_idle_timeout_ = timeout;
+}
+
 void TelnetService::loop() {
 	for (auto it = connections_.begin(); it != connections_.end(); ) {
 		if (!it->loop()) {
@@ -155,7 +163,7 @@ void TelnetService::loop() {
 #if UUID_TELNETD_HAVE_WIFICLIENT_REMOTE
 			logger_.info(F("New connection from [%s]:%u accepted"), uuid::printable_to_string(client.remoteIP()).c_str(), client.remotePort());
 #endif
-			connections_.emplace_back(shell_factory_, std::move(client));
+			connections_.emplace_back(shell_factory_, std::move(client), initial_idle_timeout_);
 #if !(UUID_TELNETD_HAVE_WIFICLIENT_REMOTE)
 			logger_.info(F("New connection %p accepted"), &connections_.back());
 #endif
@@ -163,7 +171,7 @@ void TelnetService::loop() {
 	}
 }
 
-TelnetService::Connection::Connection(shell_factory_function &shell_factory, WiFiClient &&client)
+TelnetService::Connection::Connection(shell_factory_function &shell_factory, WiFiClient &&client, unsigned long idle_timeout)
 		: client_(std::move(client)), stream_(client_) {
 #if UUID_TELNETD_HAVE_WIFICLIENT_REMOTE
 	// These have to be copied because they're not accessible on closed connections
@@ -190,6 +198,7 @@ TelnetService::Connection::Connection(shell_factory_function &shell_factory, WiF
 
 	if (client_.connected()) {
 		std::shared_ptr<uuid::console::Shell> shell = shell_factory(stream_, addr_, port_);
+		shell->idle_timeout(idle_timeout);
 		shell->start();
 		shell_ = shell;
 	} else {
