@@ -231,7 +231,8 @@ class TelnetService {
 public:
 	static constexpr size_t MAX_CONNECTIONS = 3; /*!< Maximum number of concurrent open connections. @since 0.1.0 */
 	static constexpr uint16_t DEFAULT_PORT = 23; /*!< Default TCP port to listen on. @since 0.1.0 */
-	static constexpr unsigned long DEFAULT_IDLE_TIMEOUT = 600; /*!< Default initial idle timeout. @since 0.1.0 */
+	static constexpr unsigned long DEFAULT_IDLE_TIMEOUT = 600; /*!< Default initial idle timeout (in seconds). @since 0.1.0 */
+	static constexpr unsigned long DEFAULT_WRITE_TIMEOUT = 0; /*!< Default write timeout (in milliseconds). @ since 0.1.0 */
 
 	/**
 	 * Function to handle the creation of a shell.
@@ -325,7 +326,7 @@ public:
 	/**
 	 * Get the initial idle timeout for new connections.
 	 *
-	 * @return The initial idle timeout in seconds.
+	 * @return The initial idle timeout in seconds (or 0 for disabled).
 	 * @since 0.1.0
 	 */
 	unsigned long initial_idle_timeout() const;
@@ -334,10 +335,30 @@ public:
 	 *
 	 * Defaults to TelnetService::DEFAULT_IDLE_TIMEOUT.
 	 *
-	 * @param[in] timeout Idle timeout in seconds.
+	 * @param[in] timeout Idle timeout in seconds (or 0 to disable).
 	 * @since 0.1.0
 	 */
 	void initial_idle_timeout(unsigned long timeout);
+
+	/**
+	 * Get the default socket write timeout for new connections.
+	 *
+	 * @return The default socket write timeout in seconds (or 0 for
+	 *         platform default).
+	 * @since 0.1.0
+	 */
+	unsigned long default_write_timeout() const;
+	/**
+	 * Set the default socket write timeout for new connections.
+	 *
+	 * Defaults to TelnetService::DEFAULT_WRITE_TIMEOUT (platform
+	 * default).
+	 *
+	 * @param[in] timeout Socket write timeout in seconds (or 0 for
+	 *                    platform default).
+	 * @since 0.1.0
+	 */
+	void default_write_timeout(unsigned long timeout);
 
 	/**
 	 * Accept new connections.
@@ -362,9 +383,10 @@ private:
 		 * @param[in] shell_factory Function to create a shell for new connections.
 		 * @param[in] client Client connection.
 		 * @param[in] idle_timeout Idle timeout in seconds.
+		 * @param[in] write_timeout Idle timeout in milliseconds.
 		 * @since 0.1.0
 		 */
-		Connection(shell_factory_function &shell_factory, WiFiClient &&client, unsigned long idle_timeout);
+		Connection(shell_factory_function &shell_factory, WiFiClient &&client, unsigned long idle_timeout, unsigned long write_timeout);
 		~Connection() = default;
 
 		/**
@@ -409,6 +431,7 @@ private:
 	std::list<Connection> connections_; /*!< Open connections. @since 0.1.0 */
 	shell_factory_function shell_factory_; /*!< Function to create a shell. @since 0.1.0 */
 	unsigned long initial_idle_timeout_ = DEFAULT_IDLE_TIMEOUT; /*!< Initial idle timeout (in seconds). @since 0.1.0 */
+	unsigned long write_timeout_ = DEFAULT_WRITE_TIMEOUT; /*!< Write timeout (in milliseconds). @since 0.1.0 */
 };
 
 } // namespace telnetd
