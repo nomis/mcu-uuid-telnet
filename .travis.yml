@@ -1,0 +1,29 @@
+dist: bionic
+addons:
+ apt:
+  packages: [doxygen, graphviz]
+language: python
+python:
+  - "3.7"
+
+sudo: false
+cache:
+  directories:
+    - "~/.platformio"
+
+install:
+  - pip3 install --upgrade pip
+  - pip3 install setuptools
+  - pip3 install Sphinx
+  - pip3 install platformio
+  - platformio update
+
+script:
+  - make -C test
+  - make -C docs html linkcheck
+  - git diff --exit-code
+
+notifications:
+  email:
+    recipients:
+      - secure: "zqWXLdR9ZJph67wOOkQ7fRW6BY5ZI0hSyn6uwwGYsKq185qBWHOa/2CD0l83hpRj34AYyGdYqbtjC78FIvB0ZcJZuXsqfGjlNtmU3VEp5eZcYfY/mBIuA3GpxIhbF+QFJblLqcj/40y/2om1ICvzQLHITiXMk5o27AHWgR5qbFzO5afSmzNgmV2CEpahI6v3FqPa+L55kNtv2NggpJUrRqsZgAsny9EbiVH0Xt03C1nK9Xem9PbP5XSYPJaIi6vxfZKjaSnffsSj6QHR6fOsWpeYMxscaWlh2ZGRsK6yrAq5XAD/5QO8ZEG6up/m35DrRsaKKYUNemT3xDaaRE+KojR1CI2r0++C8Y0htfexji++xEeRs3IXtIMVUsYxaG5R5wH4nQQ5I0kHkaLsy0lp4nlTBBBP+MNGYuPwPcT26cRRS0OtDmGD9mKVEGJdA/y5YQo4COGlEwO/nTADOUwP8koN1GpPioONjMYn/tDIaXLUaRaxqKzmzryRyJwRX2N8da/s4/p/bHaOv8CdvRj56yC0AKitcxkO4XfFqYhm9IYxW6JkDF5n7DhiYmjC0ISoqiDZp6dV24dGjHYta+J/GqRTGvjr00aAATDW3TteOPOXJxLR3sRWN+on/K55OCN+vY1HrqxV18SzYRVqf1v6JLSQ+T59i5H5Su5+bGBTlwc="
