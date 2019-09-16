@@ -49,7 +49,7 @@ namespace telnetd {
  * Stream wrapper that performs telnet protocol handling, option
  * negotiation and output buffering.
  *
- * @since 1.0.0
+ * @since 0.1.0
  */
 class TelnetStream: public ::Stream {
 public:

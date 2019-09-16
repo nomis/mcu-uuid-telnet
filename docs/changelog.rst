@@ -4,10 +4,10 @@ Change log
 Unreleased_
 -----------
 
-1.0.0_ |--| 2019-09-16
+0.1.0_ |--| 2019-09-16
 ----------------------
 
-First stable release.
+Initial development release.
 
 Added
 ~~~~~
@@ -20,5 +20,5 @@ Added
 
 .. |--| unicode:: U+2013 .. EN DASH
 
-.. _Unreleased: https://github.com/nomis/mcu-uuid-telnetd/compare/1.0.0...HEAD
-.. _1.0.0: https://github.com/nomis/mcu-uuid-telnetd/commits/1.0.0
+.. _Unreleased: https://github.com/nomis/mcu-uuid-telnetd/compare/0.1.0...HEAD
+.. _0.1.0: https://github.com/nomis/mcu-uuid-telnetd/commits/0.1.0
