@@ -27,10 +27,10 @@ Example
 .. _uuid::telnet::TelnetService: https://mcu-doxygen.uuid.uk/classuuid_1_1telnet_1_1TelnetService.html
 
 .. |start()| replace:: ``start()``
-.. _start(): https://mcu-doxygen.uuid.uk/classuuid_1_1telnet_1_1TelnetService.html#aa3f64dc0c3b0b8f561c004bdeb5dbcb7
+.. _start(): https://mcu-doxygen.uuid.uk/classuuid_1_1telnet_1_1TelnetService.html#aed1654945d0b7722bac5872c1a04ffcc
 
 .. |loop()| replace:: ``loop()``
-.. _loop(): https://mcu-doxygen.uuid.uk/classuuid_1_1telnet_1_1TelnetService.html#ab08b97b1afc1a8c82de5fe7dac0d890e
+.. _loop(): https://mcu-doxygen.uuid.uk/classuuid_1_1telnet_1_1TelnetService.html#ae2fd897eb9fda5caae7ebb2b6a1224f1
 
 .. |uuid::console::Shell::loop_all()| replace:: ``uuid::console::Shell::loop_all()``
 .. _uuid::console::Shell::loop_all(): https://mcu-doxygen.uuid.uk/classuuid_1_1console_1_1Shell.html#affe5b4812696a9a53eed1f394301354e
