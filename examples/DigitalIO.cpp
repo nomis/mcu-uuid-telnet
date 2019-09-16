@@ -11,7 +11,7 @@
 
 #include <uuid/common.h>
 #include <uuid/console.h>
-#include <uuid/telnetd.h>
+#include <uuid/telnet.h>
 
 using uuid::read_flash_string;
 using uuid::flash_string_vector;
@@ -19,7 +19,7 @@ using uuid::console::Commands;
 using uuid::console::Shell;
 
 static std::shared_ptr<Commands> commands = std::make_shared<Commands>();
-static uuid::telnetd::TelnetService telnet{commands};
+static uuid::telnet::TelnetService telnet{commands};
 
 void setup() {
 	commands->add_command(flash_string_vector{F("pinMode")},

@@ -1,5 +1,5 @@
 /*
- * uuid-telnetd - Telnet service
+ * uuid-telnet - Telnet service
  * Copyright 2019  Simon Arlott
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "uuid/telnetd.h"
+#include "uuid/telnet.h"
 
 #include <Arduino.h>
 #ifdef ARDUINO_ARCH_ESP8266
@@ -34,35 +34,35 @@
 #include <uuid/common.h>
 #include <uuid/log.h>
 
-#ifndef UUID_TELNETD_HAVE_WIFICLIENT_REMOTE
+#ifndef UUID_TELNET_HAVE_WIFICLIENT_REMOTE
 # if defined(ARDUINO_ARCH_ESP8266) || defined(ARDUINO_ARCH_ESP32)
-#  define UUID_TELNETD_HAVE_WIFICLIENT_REMOTE 1
+#  define UUID_TELNET_HAVE_WIFICLIENT_REMOTE 1
 # else
-#  define UUID_TELNETD_HAVE_WIFICLIENT_REMOTE 0
+#  define UUID_TELNET_HAVE_WIFICLIENT_REMOTE 0
 # endif
 #endif
 
-#ifndef UUID_TELNETD_HAVE_WIFICLIENT_NODELAY
+#ifndef UUID_TELNET_HAVE_WIFICLIENT_NODELAY
 # if defined(ARDUINO_ARCH_ESP8266) || defined(ARDUINO_ARCH_ESP32)
-#  define UUID_TELNETD_HAVE_WIFICLIENT_NODELAY 1
+#  define UUID_TELNET_HAVE_WIFICLIENT_NODELAY 1
 # else
-#  define UUID_TELNETD_HAVE_WIFICLIENT_NODELAY 0
+#  define UUID_TELNET_HAVE_WIFICLIENT_NODELAY 0
 # endif
 #endif
 
-#ifndef UUID_TELNETD_HAVE_WIFICLIENT_KEEPALIVE
+#ifndef UUID_TELNET_HAVE_WIFICLIENT_KEEPALIVE
 # if defined(ARDUINO_ARCH_ESP8266)
-#  define UUID_TELNETD_HAVE_WIFICLIENT_KEEPALIVE 1
+#  define UUID_TELNET_HAVE_WIFICLIENT_KEEPALIVE 1
 # else
-#  define UUID_TELNETD_HAVE_WIFICLIENT_KEEPALIVE 0
+#  define UUID_TELNET_HAVE_WIFICLIENT_KEEPALIVE 0
 # endif
 #endif
 
-static const char __pstr__logger_name[] __attribute__((__aligned__(sizeof(int)))) PROGMEM = "telnetd";
+static const char __pstr__logger_name[] __attribute__((__aligned__(sizeof(int)))) PROGMEM = "telnet";
 
 namespace uuid {
 
-namespace telnetd {
+namespace telnet {
 
 uuid::log::Logger TelnetService::logger_{FPSTR(__pstr__logger_name), uuid::log::Facility::DAEMON};
 
@@ -152,7 +152,7 @@ void TelnetService::loop() {
 	WiFiClient client = server_.available();
 	if (client) {
 		if (connections_.size() >= maximum_connections_) {
-#if UUID_TELNETD_HAVE_WIFICLIENT_REMOTE
+#if UUID_TELNET_HAVE_WIFICLIENT_REMOTE
 			logger_.info(F("New connection from [%s]:%u rejected (connection limit reached)"),  uuid::printable_to_string(client.remoteIP()).c_str(), client.remotePort());
 #else
 			logger_.info(F("New connection rejected (connection limit reached)"));
@@ -160,11 +160,11 @@ void TelnetService::loop() {
 			client.println(F("Maximum connection limit reached."));
 			client.stop();
 		} else {
-#if UUID_TELNETD_HAVE_WIFICLIENT_REMOTE
+#if UUID_TELNET_HAVE_WIFICLIENT_REMOTE
 			logger_.info(F("New connection from [%s]:%u accepted"), uuid::printable_to_string(client.remoteIP()).c_str(), client.remotePort());
 #endif
 			connections_.emplace_back(shell_factory_, std::move(client), initial_idle_timeout_, write_timeout_);
-#if !(UUID_TELNETD_HAVE_WIFICLIENT_REMOTE)
+#if !(UUID_TELNET_HAVE_WIFICLIENT_REMOTE)
 			logger_.info(F("New connection %p accepted"), &connections_.back());
 #endif
 		}
@@ -173,7 +173,7 @@ void TelnetService::loop() {
 
 TelnetService::Connection::Connection(shell_factory_function &shell_factory, WiFiClient &&client, unsigned long idle_timeout, unsigned long write_timeout)
 		: client_(std::move(client)), stream_(client_) {
-#if UUID_TELNETD_HAVE_WIFICLIENT_REMOTE
+#if UUID_TELNET_HAVE_WIFICLIENT_REMOTE
 	// These have to be copied because they're not accessible on closed connections
 	addr_ = client_.remoteIP();
 	port_ = client_.remotePort();
@@ -181,11 +181,11 @@ TelnetService::Connection::Connection(shell_factory_function &shell_factory, WiF
 	port_ = 0;
 #endif
 
-#if UUID_TELNETD_HAVE_WIFICLIENT_NODELAY
+#if UUID_TELNET_HAVE_WIFICLIENT_NODELAY
 	client_.setNoDelay(true);
 #endif
 
-#if UUID_TELNETD_HAVE_WIFICLIENT_KEEPALIVE
+#if UUID_TELNET_HAVE_WIFICLIENT_KEEPALIVE
 	// Disconnect after 30 seconds without a response
 	client_.keepAlive(5, 5, 5);
 #endif
@@ -217,7 +217,7 @@ bool TelnetService::Connection::loop() {
 		}
 		return true;
 	} else {
-#if UUID_TELNETD_HAVE_WIFICLIENT_REMOTE
+#if UUID_TELNET_HAVE_WIFICLIENT_REMOTE
 		logger_.info(F("Connection from [%s]:%u closed"), uuid::printable_to_string(addr_).c_str(), port_);
 #else
 		logger_.info(F("Connection %p closed"), this);
@@ -232,6 +232,6 @@ void TelnetService::Connection::stop() {
 	}
 }
 
-} // namespace telnetd
+} // namespace telnet
 
 } // namespace fridge

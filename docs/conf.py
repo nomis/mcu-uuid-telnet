@@ -8,7 +8,7 @@ needs_sphinx = '1.3'
 extensions = []
 source_suffix = ['.rst']
 
-project = u'mcu-uuid-telnetd'
+project = u'mcu-uuid-telnet'
 copyright = u'2019, Simon Arlott'
 author = u'Simon Arlott'
 

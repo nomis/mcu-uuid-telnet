@@ -1,5 +1,5 @@
 /*
- * uuid-telnetd - Telnet service
+ * uuid-telnet - Telnet service
  * Copyright 2019  Simon Arlott
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UUID_TELNETD_H_
-#define UUID_TELNETD_H_
+#ifndef UUID_TELNET_H_
+#define UUID_TELNET_H_
 
 #include <Arduino.h>
 #ifdef ARDUINO_ARCH_ESP8266
@@ -40,10 +40,10 @@ namespace uuid {
 /**
  * Telnet service.
  *
- * - <a href="https://github.com/nomis/mcu-uuid-telnetd/">Git Repository</a>
- * - <a href="https://mcu-uuid-telnetd.readthedocs.io/">Documentation</a>
+ * - <a href="https://github.com/nomis/mcu-uuid-telnet/">Git Repository</a>
+ * - <a href="https://mcu-uuid-telnet.readthedocs.io/">Documentation</a>
  */
-namespace telnetd {
+namespace telnet {
 
 /**
  * Stream wrapper that performs telnet protocol handling, option
@@ -434,7 +434,7 @@ private:
 	unsigned long write_timeout_ = DEFAULT_WRITE_TIMEOUT; /*!< Write timeout (in milliseconds). @since 0.1.0 */
 };
 
-} // namespace telnetd
+} // namespace telnet
 
 } // namespace uuid
 

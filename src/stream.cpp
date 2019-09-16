@@ -1,5 +1,5 @@
 /*
- * uuid-telnetd - Telnet service
+ * uuid-telnet - Telnet service
  * Copyright 2019  Simon Arlott
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "uuid/telnetd.h"
+#include "uuid/telnet.h"
 
 #include <Arduino.h>
 
@@ -26,7 +26,7 @@
 
 namespace uuid {
 
-namespace telnetd {
+namespace telnet {
 
 TelnetStream::TelnetStream(WiFiClient &client)
 		: client_(client) {
@@ -353,6 +353,6 @@ size_t TelnetStream::raw_write(const uint8_t *buffer, size_t size) {
 	return size;
 }
 
-} // namespace telnetd
+} // namespace telnet
 
 } // namespace fridge

@@ -20,5 +20,5 @@ Added
 
 .. |--| unicode:: U+2013 .. EN DASH
 
-.. _Unreleased: https://github.com/nomis/mcu-uuid-telnetd/compare/0.1.0...HEAD
-.. _0.1.0: https://github.com/nomis/mcu-uuid-telnetd/commits/0.1.0
+.. _Unreleased: https://github.com/nomis/mcu-uuid-telnet/compare/0.1.0...HEAD
+.. _0.1.0: https://github.com/nomis/mcu-uuid-telnet/commits/0.1.0

@@ -1,5 +1,5 @@
-mcu-uuid-telnetd
-================
+mcu-uuid-telnet
+===============
 
 Description
 -----------
@@ -36,8 +36,8 @@ Resources
    :titlesonly:
    :maxdepth: 1
 
-   Source code <https://github.com/nomis/mcu-uuid-telnetd>
-   Releases <https://github.com/nomis/mcu-uuid-telnetd/releases>
-   Namespace reference <https://mcu-doxygen.uuid.uk/namespaceuuid_1_1telnetd.html>
+   Source code <https://github.com/nomis/mcu-uuid-telnet>
+   Releases <https://github.com/nomis/mcu-uuid-telnet/releases>
+   Namespace reference <https://mcu-doxygen.uuid.uk/namespaceuuid_1_1telnet.html>
    changelog
-   Issue tracker <https://github.com/nomis/mcu-uuid-telnetd/issues>
+   Issue tracker <https://github.com/nomis/mcu-uuid-telnet/issues>
