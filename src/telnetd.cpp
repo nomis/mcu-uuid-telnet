@@ -58,14 +58,6 @@
 # endif
 #endif
 
-#ifndef UUID_TELNETD_HAVE_WIFICLIENT_SYNC
-# if defined(ARDUINO_ARCH_ESP8266)
-#  define UUID_TELNETD_HAVE_WIFICLIENT_SYNC 1
-# else
-#  define UUID_TELNETD_HAVE_WIFICLIENT_SYNC 0
-# endif
-#endif
-
 static const char __pstr__logger_name[] __attribute__((__aligned__(sizeof(int)))) PROGMEM = "telnetd";
 
 namespace uuid {
@@ -183,10 +175,6 @@ TelnetService::Connection::Connection(shell_factory_function &shell_factory, WiF
 
 #if UUID_TELNETD_HAVE_WIFICLIENT_NODELAY
 	client_.setNoDelay(true);
-#endif
-
-#if UUID_TELNETD_HAVE_WIFICLIENT_SYNC
-	client_.setSync(true);
 #endif
 
 #if UUID_TELNETD_HAVE_WIFICLIENT_KEEPALIVE
