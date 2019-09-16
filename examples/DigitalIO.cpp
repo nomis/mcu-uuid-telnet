@@ -22,8 +22,6 @@ static std::shared_ptr<Commands> commands = std::make_shared<Commands>();
 static uuid::telnetd::TelnetService telnet{commands};
 
 void setup() {
-	std::shared_ptr<Commands> commands = std::make_shared<Commands>();
-
 	commands->add_command(flash_string_vector{F("pinMode")},
 		flash_string_vector{F("<pin>"), F("<mode>")},
 
@@ -119,6 +117,13 @@ void setup() {
 		[] (Shell &shell, const std::vector<std::string> &arguments
 				__attribute__((unused))) {
 			shell.print_all_available_commands();
+		}
+	);
+
+	commands->add_command(flash_string_vector{F("exit")},
+		[] (Shell &shell, const std::vector<std::string> &arguments
+				__attribute__((unused))) {
+			shell.stop();
 		}
 	);
 
