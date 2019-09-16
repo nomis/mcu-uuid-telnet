@@ -21,16 +21,16 @@ The `binary <https://tools.ietf.org/html/rfc856>`_, `echo
 Example
 -------
 
-.. literalinclude:: ../examples/Example.cpp
+.. literalinclude:: ../examples/DigitalIO.cpp
 
 .. |uuid::telnetd::TelnetService| replace:: ``uuid::telnetd::TelnetService``
 .. _uuid::telnetd::TelnetService: https://mcu-doxygen.uuid.uk/classuuid_1_1telnetd_1_1TelnetService.html
 
 .. |start()| replace:: ``start()``
-.. _start(): https://mcu-doxygen.uuid.uk/classuuid_1_1telnetd_1_1TelnetService.html#TODO
+.. _start(): https://mcu-doxygen.uuid.uk/classuuid_1_1telnetd_1_1TelnetService.html#aa3f64dc0c3b0b8f561c004bdeb5dbcb7
 
 .. |loop()| replace:: ``loop()``
-.. _loop(): https://mcu-doxygen.uuid.uk/classuuid_1_1telnetd_1_1TelnetService.html#TODO
+.. _loop(): https://mcu-doxygen.uuid.uk/classuuid_1_1telnetd_1_1TelnetService.html#ab08b97b1afc1a8c82de5fe7dac0d890e
 
 .. |uuid::console::Shell::loop_all()| replace:: ``uuid::console::Shell::loop_all()``
 .. _uuid::console::Shell::loop_all(): https://mcu-doxygen.uuid.uk/classuuid_1_1console_1_1Shell.html#affe5b4812696a9a53eed1f394301354e
