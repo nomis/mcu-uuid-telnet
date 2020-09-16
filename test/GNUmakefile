@@ -7,6 +7,8 @@ build:
 	rm -rf build/*/.pio
 	# Workaround for https://github.com/platformio/platformio-core/issues/2573
 	cd build/example-DigitalIO && pio lib install uuid-common uuid-log
+	# Workaround for https://github.com/platformio/platformio-core/issues/3673
+	git checkout -- build/example-DigitalIO/platformio.ini
 	platformio run -d build/example-DigitalIO
 
 doxygen:
