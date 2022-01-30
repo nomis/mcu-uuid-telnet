@@ -39,5 +39,6 @@ Resources
    Source code <https://github.com/nomis/mcu-uuid-telnet>
    Releases <https://github.com/nomis/mcu-uuid-telnet/releases>
    Namespace reference <https://mcu-doxygen.uuid.uk/namespaceuuid_1_1telnet.html>
+   PlatformIO library <https://registry.platformio.org/libraries/nomis/uuid-telnet>
    changelog
    Issue tracker <https://github.com/nomis/mcu-uuid-telnet/issues>
