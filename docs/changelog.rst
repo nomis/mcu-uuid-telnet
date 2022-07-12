@@ -4,6 +4,11 @@ Change log
 Unreleased_
 -----------
 
+0.1.3_ |--| 2022-07-12
+----------------------
+
+Upgrade version of ``uuid-console``.
+
 Changed
 ~~~~~~~
 
@@ -41,7 +46,8 @@ Added
 
 .. |--| unicode:: U+2013 .. EN DASH
 
-.. _Unreleased: https://github.com/nomis/mcu-uuid-telnet/compare/0.1.2...HEAD
+.. _Unreleased: https://github.com/nomis/mcu-uuid-telnet/compare/0.1.3...HEAD
+.. _0.1.3: https://github.com/nomis/mcu-uuid-telnet/compare/0.1.2...0.1.3
 .. _0.1.2: https://github.com/nomis/mcu-uuid-telnet/compare/0.1.1...0.1.2
 .. _0.1.1: https://github.com/nomis/mcu-uuid-telnet/compare/0.1.0...0.1.1
 .. _0.1.0: https://github.com/nomis/mcu-uuid-telnet/commits/0.1.0
