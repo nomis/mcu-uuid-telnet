@@ -355,4 +355,4 @@ size_t TelnetStream::raw_write(const uint8_t *buffer, size_t size) {
 
 } // namespace telnet
 
-} // namespace fridge
+} // namespace uuid

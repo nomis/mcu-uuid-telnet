@@ -234,4 +234,4 @@ void TelnetService::Connection::stop() {
 
 } // namespace telnet
 
-} // namespace fridge
+} // namespace uuid
