@@ -4,6 +4,11 @@ Change log
 Unreleased_
 -----------
 
+Changed
+~~~~~~~
+
+* Use version 1.x.x of ``uuid-console``.
+
 0.1.3_ |--| 2022-07-12
 ----------------------
 
