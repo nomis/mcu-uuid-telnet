@@ -34,5 +34,8 @@
 	"build": {
 		"flags": "-Wall -Wextra",
 		"libLDFMode": "chain+"
-	}
+	},
+	"headers": [
+		"uuid/telnet.h"
+	]
 }
