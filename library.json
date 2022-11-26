@@ -12,7 +12,7 @@
 		"type": "git",
 		"url": "https://github.com/nomis/mcu-uuid-telnet.git"
 	},
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"license": "GPL-3.0-or-later",
 	"homepage": "https://mcu-uuid-telnet.readthedocs.io/",
 	"export": {
