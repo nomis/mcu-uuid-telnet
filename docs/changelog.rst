@@ -8,6 +8,7 @@ Changed
 ~~~~~~~
 
 * Use ``PSTR_ALIGN`` for flash strings.
+* Use version 2.x.x of ``uuid-console``.
 
 0.1.4_ |--| 2022-10-29
 ----------------------
