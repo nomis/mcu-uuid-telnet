@@ -29,7 +29,7 @@
 	"dependencies": {
 		"nomis/uuid-common": "^1.2.0",
 		"nomis/uuid-log": ">=2.3.0,<4",
-		"nomis/uuid-console": ">=1.0.1,<3"
+		"nomis/uuid-console": "^3.0.0"
 	},
 	"build": {
 		"flags": "-Wall -Wextra",

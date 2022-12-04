@@ -4,6 +4,17 @@ Change log
 Unreleased_
 -----------
 
+Changed
+~~~~~~~
+
+* Use version 3.x.x of ``uuid-console``.
+
+Fixed
+~~~~~
+
+* Potential for ``TelnetStream`` to be destroyed before the ``Shell``
+  using it stops when lowering the maximum number of connections.
+
 0.1.5_ |--| 2022-11-26
 ----------------------
 

@@ -78,7 +78,7 @@ TelnetService::TelnetService(std::shared_ptr<uuid::console::Commands> commands, 
 TelnetService::TelnetService(uint16_t port, std::shared_ptr<uuid::console::Commands> commands, unsigned int context, unsigned int flags)
 		: TelnetService(port,
 				[commands, context, flags] (Stream &stream, const IPAddress &addr __attribute__((unused)), uint16_t port __attribute__((unused))) -> std::shared_ptr<uuid::console::Shell> {
-	return std::make_shared<uuid::console::StreamConsole>(commands, stream, context, flags);
+	return std::make_shared<uuid::console::Shell>(stream, commands, context, flags);
 }) {
 
 }
@@ -115,14 +115,13 @@ size_t TelnetService::maximum_connections() const {
 void TelnetService::maximum_connections(size_t count) {
 	maximum_connections_ = std::max((size_t)1, count);
 
-	while (connections_.size() > maximum_connections_) {
+	if (connections_.size() > maximum_connections_) {
+		size_t stop = connections_.size() - maximum_connections_;
+
 		for (auto it = connections_.begin(); it != connections_.end(); ) {
-			if (it->active()) {
-				it->stop();
-				it = connections_.erase(it);
-				break;
-			} else {
-				it = connections_.erase(it);
+			if (it->stop()) {
+				if (--stop == 0)
+					break;
 			}
 		}
 	}
@@ -205,19 +204,17 @@ TelnetService::Connection::Connection(shell_factory_function &shell_factory, WiF
 		shell->idle_timeout(idle_timeout);
 		shell->start();
 		shell_ = shell;
-	} else {
-		shell_ = nullptr;
 	}
 }
 
-bool TelnetService::Connection::active() {
-	return shell_.use_count() > 1;
-}
-
 bool TelnetService::Connection::loop() {
-	if (active()) {
+	if (!shell_.expired()) {
 		if (!client_.connected()) {
-			shell_->stop();
+			auto shell = shell_.lock();
+
+			if (shell) {
+				shell->stop();
+			}
 		}
 		return true;
 	} else {
@@ -230,9 +227,14 @@ bool TelnetService::Connection::loop() {
 	}
 }
 
-void TelnetService::Connection::stop() {
-	if (shell_) {
-		shell_->stop();
+bool TelnetService::Connection::stop() {
+	auto shell = shell_.lock();
+
+	if (shell) {
+		shell->stop();
+		return true;
+	} else {
+		return false;
 	}
 }
 

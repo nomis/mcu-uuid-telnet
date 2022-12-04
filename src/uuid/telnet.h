@@ -390,13 +390,6 @@ private:
 		~Connection() = default;
 
 		/**
-		 * Check if the shell is still active.
-		 *
-		 * @return Active status of the shell.
-		 * @since 0.1.0
-		 */
-		bool active();
-		/**
 		 * Stop the shell if the client is not connected.
 		 *
 		 * @return Active status of the shell.
@@ -406,9 +399,10 @@ private:
 		/**
 		 * Stop the shell.
 		 *
-		 * @since 0.1.0
+		 * @return True if the shell had not already stopped.
+		 * @since 0.2.0
 		 */
-		void stop();
+		bool stop();
 
 	private:
 		Connection(const Connection&) = delete;
@@ -416,7 +410,7 @@ private:
 
 		WiFiClient client_; /*!< Client connection. @since 0.1.0 */
 		TelnetStream stream_; /*!< Telnet stream for the connection. @since 0.1.0 */
-		std::shared_ptr<uuid::console::Shell> shell_; /*!< Shell for connection. @since 0.1.0 */
+		std::weak_ptr<uuid::console::Shell> shell_; /*!< Shell for connection. @since 0.2.0 */
 		IPAddress addr_; /*!< Remote address of connection. @since 0.1.0 */
 		uint16_t port_; /*!< Remote port of connection. @since 0.1.0 */
 	};
