@@ -20,6 +20,16 @@ Fixed
 * Potential for ``TelnetStream`` to be destroyed before the ``Shell``
   using it stops when lowering the maximum number of connections.
 
+0.1.6_ |--| 2024-03-24
+----------------------
+
+Downgrade version of ``uuid-console``.
+
+Changed
+~~~~~~~
+
+* Use version 1.x.x of ``uuid-console``.
+
 0.1.5_ |--| 2022-11-26
 ----------------------
 
@@ -85,6 +95,7 @@ Added
 
 .. _Unreleased: https://github.com/nomis/mcu-uuid-telnet/compare/0.2.0...HEAD
 .. _0.2.0: https://github.com/nomis/mcu-uuid-telnet/compare/0.1.5...0.2.0
+.. _0.1.6: https://github.com/nomis/mcu-uuid-telnet/compare/0.1.5...0.1.6
 .. _0.1.5: https://github.com/nomis/mcu-uuid-telnet/compare/0.1.4...0.1.5
 .. _0.1.4: https://github.com/nomis/mcu-uuid-telnet/compare/0.1.3...0.1.4
 .. _0.1.3: https://github.com/nomis/mcu-uuid-telnet/compare/0.1.2...0.1.3
