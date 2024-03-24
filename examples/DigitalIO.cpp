@@ -45,20 +45,20 @@ void setup() {
 					pin, arguments[1].c_str());
 		},
 
-		[] (Shell &shell, const std::vector<std::string> &current_arguments,
-				const std::string &next_argument)
+		[] (Shell &shell __attribute__((unused)),
+				const std::vector<std::string> &arguments)
 				-> const std::vector<std::string> {
-			if (current_arguments.size() == 1) {
+			if (arguments.size() == 1) {
 				/* The first argument has been provided, so return
 				 * completion values for the second argument.
 				 */
-				return {
+				return std::vector<std::string>{
 					read_flash_string(F("INPUT")),
 					read_flash_string(F("OUTPUT")),
 					read_flash_string(F("INPUT_PULLUP"))
 				};
 			} else {
-				return {};
+				return std::vector<std::string>{};
 			}
 		}
 	);
@@ -96,31 +96,33 @@ void setup() {
 					arguments[1].c_str(), pin);
 		},
 
-		[] (Shell &shell, const std::vector<std::string> &current_arguments,
-				const std::string &next_argument)
+		[] (Shell &shell __attribute__((unused)),
+				const std::vector<std::string> &arguments)
 				-> const std::vector<std::string> {
-			if (current_arguments.size() == 1) {
+			if (arguments.size() == 1) {
 				/* The first argument has been provided, so return
 				 * completion values for the second argument.
 				 */
-				return {
+				return std::vector<std::string>{
 					read_flash_string(F("HIGH")),
 					read_flash_string(F("LOW"))
 				};
 			} else {
-				return {};
+				return std::vector<std::string>{};
 			}
 		}
 	);
 
 	commands->add_command(flash_string_vector{F("help")},
-		[] (Shell &shell, const std::vector<std::string> &arguments) {
+		[] (Shell &shell, const std::vector<std::string> &arguments
+				__attribute__((unused))) {
 			shell.print_all_available_commands();
 		}
 	);
 
 	commands->add_command(flash_string_vector{F("exit")},
-		[] (Shell &shell, const std::vector<std::string> &arguments) {
+		[] (Shell &shell, const std::vector<std::string> &arguments
+				__attribute__((unused))) {
 			shell.stop();
 		}
 	);
